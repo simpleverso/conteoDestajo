@@ -6,19 +6,21 @@ int boton = 0;
 int contador = 0;
 char bandera = '0';
 
-void setup() 
+void setup()
 {
   lcd.begin(20, 4);
   Wire.begin(20); //direccion
-  lcd.print("Direccion: 20");
+  lcd.print("DIRECCION: 20");
   Wire.onReceive(receiveEvent);
   Wire.onRequest(requestEvent);
   pinMode(7, INPUT);
+  pinMode(6, INPUT);
+  pinMode(5, INPUT);
 }
 
 void loop() 
 {
-  delay(125);
+  delay(120);
   int boton = digitalRead(7);
   if (boton == HIGH) 
   {
@@ -26,11 +28,57 @@ void loop()
    contador++;
    lcd.setCursor(0, 3);
    lcd.print(contador); 
-   delay(250);
+   delay(200);
   }
-  else
+  
+  int boton2 = digitalRead(6);
+  if (boton2 == HIGH) 
   {
+    delay(1500);
+    boton2 = digitalRead(6);
+    if (boton2 == HIGH) 
+    {
+        delay(1500);
+        boton2 = digitalRead(6);
+        if (boton2 == HIGH) 
+        {
+           bandera='f';  
+           contador=0;
+           lcd.setCursor(0, 3);
+           lcd.print("Tarea Finalizada.");
+           delay(850);
+           lcd.clear();
+           lcd.print("DIRECCION: 20");
+           delay(250);
+        }
+     }
   }
+
+
+ int boton3 = digitalRead(5);
+  if (boton3 == HIGH) 
+  {
+    delay(1500);
+    boton3 = digitalRead(5);
+    if (boton3 == HIGH) 
+    {
+        delay(1500);
+        boton3 = digitalRead(5);
+        if (boton3 == HIGH) 
+        {
+           bandera='p';  
+           contador=0;
+           lcd.setCursor(0, 3);
+           lcd.print("Tarea Pausada.");
+           delay(850);
+           lcd.clear();
+           lcd.print("DIRECCION: 20");
+           delay(250);
+        }
+     }
+  }
+  
+
 }
 
 void receiveEvent(int howMany) 
