@@ -55,7 +55,7 @@ void serialEvent()
   while (Serial.available()) 
   {
     char inChar = (char)Serial.read(); 
-    if (inChar == '\n') 
+    if (inChar == '*') 
     {
       stringComplete = true;
     }
@@ -68,7 +68,7 @@ void serialEvent()
 
 void recoger(int valor) 
 {
-   Wire.requestFrom(valor, 1);    // request 1 bytes from slave device #8
+   Wire.requestFrom(valor, 1);
    while (Wire.available()) 
    {
     char c = Wire.read();
